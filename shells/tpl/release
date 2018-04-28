@@ -1,0 +1,192 @@
+#!/bin/bash
+
+## ================================================================================================
+## 应用发布脚本模板
+## ================================================================================================
+
+## ================================================================================================
+## 相关信息变量定义
+ENV="{{ENV}}"
+# 新版本号：以时间戳为准
+version=`date +%y%m%d%H%M`
+# 应用名称
+appName="{{appName}}"
+# 应用包名称
+packageName="{{packageName}}"
+# 容器端口映射
+masterPort="{{masterPort}}"
+slavePort="{{slavePort}}"
+# 容器名称
+containerName=${appName}
+slaveContainerName="${appName}-slave"
+
+# APP代码挂载目录，如 /usr/local/iot/iotp-web
+publishDir="/home/iotusr/iotapps"
+appDir="${publishDir}/${appName}"
+
+# 服务器共享目录
+appUploadDir="{{shareDir}}/${appName}"
+
+# 启动日志过滤关键字，用于判断容器是否启动成功
+grepContext="start Server startup in"
+## ================================================================================================
+
+function assertFail(){
+    if [ $2 != "0" ]; then
+        echo "$1 执行失败 ";
+        # 退出脚本
+        exit 1;
+    fi
+}
+
+## ================================================================================================
+## 备份旧版本
+cd ~
+
+if [ ! -d ${publishDir} ]; then
+     mkdir -p ${publishDir}
+fi
+
+# 每个应用目录下都要主要(master)、次要(slave)两个存储目录，分别对应着2个docker容器挂载目录
+if [ ! -d ${appDir} ]; then
+    mkdir -p ${appDir} && mkdir -p ${appDir}/master && mkdir -p ${appDir}/slave
+    assertFail "mkdir ${appDir}" $?
+
+    mkdir -p ${appDir}/master/html
+    mkdir -p ${appDir}/master/logs && mkdir -p ${appDir}/master/bak
+    assertFail "mkdir master dirs" $?
+
+    mkdir -p ${appDir}/slave/html
+    mkdir -p ${appDir}/slave/logs && mkdir -p ${appDir}/slave/bak
+    assertFail "mkdir slave dirs" $?
+fi
+
+## ================================================================================================
+
+
+## ================================================================================================
+## 更新 slave 应用
+if [ "${ENV}" == "product" ]; then
+  echo "备份 slave 应用文件: ${appDir}/slave/bak/${version}"
+  mkdir -p ${appDir}/slave/bak/${version}
+  cp -rf ${appDir}/slave/html ${appDir}/slave/bak/${version}
+  cp -rf ${appDir}/slave/logs ${appDir}/slave/bak/${version}
+  assertFail "backup slave files" $?
+
+  echo "删除 slave 旧版本文件"
+  rm -rf ${appDir}/slave/html/*
+  rm -rf ${appDir}/slave/logs/*
+  assertFail "remove slave files" $?
+
+  # 解压war包
+  cp ${appUploadDir}/${packageName} ${appDir}/slave
+  assertFail "cp ${appUploadDir}/${packageName}" $?
+
+  tar -xzf ${appDir}/slave/${packageName} -C ${appDir}/slave/html
+  assertFail "unzip ${appDir}/slave/${packageName}" $?
+fi
+
+
+# 停止删除现有容器
+# echo "停止删除容器：${slaveContainerName}"
+# containerId=$(docker ps -a|grep ${slaveContainerName}|awk '{print $1}')
+# if [[ ${containerId} != "" ]]; then
+#     docker stop ${slaveContainerName} && docker rm ${slaveContainerName}
+# fi
+
+# 重建运行容器
+# 使用 xohaa/nginx:2.0 镜像，宿主机必须拥有 gid=2000,uid=2000 的用户，否则启动权限创建文件
+# docker run --name=${slaveContainerName} -d \
+# -p ${slavePort}:80 \
+# -v ${appDir}/slave/html:/usr/share/nginx/html \
+# -v ${appDir}/slave/logs:/var/log/nginx \
+# -v /usr/local/iot/apiclient_cert.p12:/usr/local/iot/apiclient_cert.p12 \
+# xohaa/nginx:2.1
+## ===============================================================================================
+
+## ================================================================================================
+## 更新 master 应用
+timeout=0
+line=$(docker logs --tail=200 ${slaveContainerName} 2>&1 | grep "${grepContext}")
+# while [ "${line}" == "" -a ${timeout} -le 20 ]
+# do
+#     sleep 2s
+#     timeout=$[timeout + 2]
+#     line=$(docker logs --tail=500 ${slaveContainerName} 2>&1 | grep "${grepContext}")
+#     echo "正在启动 ${slaveContainerName}... ${timeout} / 20"
+# done
+
+# 判断是否启动成功
+# -a：与，-o: 或
+# -ge: 大于等于，-le：小于等于
+# -gt: 大于，-lt：小于
+# if [ "${line}" == "" -o ${timeout} -ge 20 ];
+# then
+#     docker logs --tail=500 ${slaveContainerName}
+#     echo "${slaveContainerName} 启动失败"
+#     exit 1;
+# fi
+
+
+if [ "${ENV}" == "product" ]; then
+  echo "备份 master 应用文件: ${appDir}/master/bak/${version}"
+  mkdir -p ${appDir}/master/bak/${version}
+  cp -rf ${appDir}/master/html ${appDir}/master/bak/${version}
+  cp -rf ${appDir}/master/logs ${appDir}/master/bak/${version}
+  assertFail "backup master files" $?
+fi
+
+echo "删除 master 旧版本文件"
+rm -rf ${appDir}/master/html/*
+rm -rf ${appDir}/master/logs/*
+assertFail "remove master files" $?
+
+# 解压war包
+cp ${appUploadDir}/${packageName} ${appDir}/master
+assertFail "cp ${appUploadDir}/${packageName}" $?
+
+tar -xzf ${appDir}/master/${packageName} -C ${appDir}/master/html
+assertFail "unzip ${appDir}/master/${packageName}" $?
+
+# 停止删除现有容器
+echo "停止删除容器：${containerName}"
+containerId=$(docker ps -a|grep ${containerName}|awk '{print $1}')
+if [[ ${containerId} != "" ]]; then
+    docker stop ${containerName} && docker rm ${containerName}
+fi
+
+# 重建运行容器
+# 使用 xohaa/nginx:1.0 镜像，宿主机必须拥有 gid=2000,uid=2000 的用户，否则启动权限创建文件
+docker run --name=${containerName} -d \
+-p ${masterPort}:8080 \
+-v ${appDir}/master/html:/usr/share/nginx/html \
+-v ${appDir}/master/logs:/var/log/nginx \
+-v /usr/local/iot/apiclient_cert.p12:/usr/local/iot/apiclient_cert.p12 \
+xohaa/nginx:2.5
+
+
+# 判断是否启动成功
+# -a：与，-o: 或
+# -ge: 大于等于，-le：小于等于
+# -gt: 大于，-lt：小于
+timeout=0
+line=$(docker logs --tail=200 ${containerName} 2>&1 | grep "${grepContext}")
+while [ "${line}" == "" -a ${timeout} -le 10 ]
+do
+    sleep 2s
+    timeout=$[timeout + 2]
+    line=$(docker logs --tail=200 ${containerName} 2>&1 | grep "${grepContext}")
+    echo "正在启动 ${containerName}... ${timeout} / 10"
+done
+
+# if [ "${line}" != "" -a ${timeout} -le 20 ];
+# then
+#    echo "${containerName} 启动成功"
+#else
+#    echo "${containerName} 启动失败"
+#fi
+
+# echo "stop ${slaveContainerName}"
+# docker stop ${slaveContainerName}
+docker logs --tail=200 ${containerName}
+## ===============================================================================================

@@ -1,0 +1,106 @@
+/**
+ * 配网工具
+ * @author    yangshubo
+ * @created   2018-03-21
+ */
+
+.airkiss-pages-top {
+  text-align: center;
+  padding-bottom: 15px;
+}
+.airkiss-padding {
+  padding-top: 50px;
+}
+.airkiss-pages-content {
+  padding: 5px 30px;
+  position: relative;
+}
+.airkiss-lists {
+  padding: 10px 0;
+  font-size: 8pt;
+}
+.airkiss-lists li {
+  width: 100%;
+  color: #666;
+  position: relative;
+  padding-bottom: 3px;
+}
+.airkiss-lists li:before {
+  content: '•';
+  font-size: 12pt;
+  color: #333;
+  position: absolute;
+  top: -3px;
+  left: -10px;
+}
+.airkiss-btn {
+  width: 80%;
+  height: 40px;
+  line-height: 20px;
+  color: #3399ff;
+  border: 1px dashed #3399ff;
+  border-radius: 20px;
+  text-align: center;
+  overflow: hidden;
+  font-size: 14pt;
+  background-color: #fff;
+  position: absolute;
+  left: 10%;
+  bottom: 30px;
+}
+.airkiss-icon-pic {
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 68pt;
+  overflow: hidden;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+.airkiss-top-tips {
+  font-size: 9pt;
+}
+.airkiss-border {
+  border-radius: 10px;
+  padding: 10px 10px 10px 20px;
+  background-color: #ffffff;
+}
+.airkiss-border-deg {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  left: calc((100% - 15px) / 2);
+  top: -6px;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+.airkiss-border-deg01 {
+  width: 50px;
+  height: 15px;
+  background: #fff;
+  position: absolute;
+  left: calc((100% - 48px) / 2);
+  top: 1px;
+  z-index: 9;
+}
+.airkiss-pages-border {
+  padding: 0;
+  margin: 20px;
+}
+.airkiss-device-msgs {
+  padding: 15px 0;
+}
+.airkiss-device-msg {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.airkiss-input {
+  border-bottom: 1px solid #333;
+  padding: 15px 5px 5px 5px;
+}
+

@@ -1,0 +1,405 @@
+/* ----------------------------------------------
+ * 动画mixin定义
+ * ---------------------------------------------- */
+
+// 动画持续时间
+@mixin animated($duration: 0.5s) {
+  -webkit-animation-duration: $duration;
+  animation-duration: $duration;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+// 定义动画keyframes
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+// 淡入动画: fadeIn
+@mixin fadeIn($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeIn){
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+// 淡出动画: fadeOut
+@mixin fadeOut($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeOut){
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+
+// 从左边淡入动画: fadeInLeft
+@mixin fadeInLeft($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeInLeft){
+      from {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+// 从右边淡入动画: fadeInRight
+@mixin fadeInRight($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeInRight){
+      from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+
+// 从左边淡出动画: fadeOutLeft
+@mixin fadeOutLeft($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeOutLeft){
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeOutLeft;
+          animation-name: fadeOutLeft;
+}
+
+// 从右边淡出动画: fadeOutRight
+@mixin fadeOutRight($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeOutRight){
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeOutRight;
+          animation-name: fadeOutRight;
+}
+
+// 从底部淡入动画: fadeInUp
+@mixin fadeInUp($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeInUp){
+      from {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+// 从底部淡出动画: fadeOutDown
+@mixin fadeOutDown($duration: 0.5s){
+  @at-root {
+    @include keyframes(fadeOutDown){
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+
+
+// 从右边滑入: SlideInRight
+@mixin slideInRight($duration: 0.5s){
+  @at-root {
+    @include keyframes(slideInRight){
+      from {
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: slideInRight;
+          animation-name: slideInRight;
+}
+
+// 从右边滑出: SlideOutRight
+@mixin slideOutRight($duration: 0.5s){
+  @at-root {
+    @include keyframes(slideOutRight){
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        visibility: hidden;
+        transform: translate3d(100%, 0, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: slideOutRight;
+          animation-name: slideOutRight;
+}
+
+// 从顶部滑入: slideInUp
+@mixin slideInUp($duration: 0.5s){
+  @at-root {
+    @include keyframes(slideInUp){
+      from {
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+}
+
+// 从底部滑入: slideInDown
+@mixin slideInDown($duration: 0.5s){
+  @at-root {
+    @include keyframes(slideInDown){
+      from {
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown;
+}
+
+// 从顶部滑出: slideOutUp
+@mixin slideOutUp($duration: 0.5s){
+  @at-root {
+    @include keyframes(slideOutUp){
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        visibility: hidden;
+        transform: translate3d(0, -100%, 0);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: slideOutUp;
+  animation-name: slideOutUp;
+}
+
+// ---------------------
+// 点击水纹效果 - 1
+@mixin ripple($bg: $gray) {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, $bg 10%, transparent 10.01%) no-repeat 50%;
+    transform: scale(10,10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+  }
+
+  &:active:after {
+    transform: scale(0,0);
+    opacity: .2;
+    transition: 0s;
+  }
+}
+
+
+// 脉冲动画
+@mixin pulse($duration: 0.5s){
+  @at-root {
+    @include keyframes(pulse){
+      from {
+        transform: scale3d(1, 1, 1);
+      }
+
+      50% {
+        transform: scale3d(1.1, 1.1, 1.1);
+      }
+
+      to {
+        transform: scale3d(1, 1, 1);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}
+
+
+// 翻动动画
+@mixin flipInY($duration: 0.5s){
+  @at-root {
+    @include keyframes(flipInY){
+      from {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        animation-timing-function: ease-in;
+        opacity: 0;
+      }
+
+      40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+        animation-timing-function: ease-in;
+      }
+
+      60% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+        opacity: 1;
+      }
+
+      80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+      }
+
+      to {
+        transform: perspective(400px);
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: flipInY;
+  animation-name: flipInY;
+  backface-visibility: visible !important;;
+}
+
+@mixin flipOutY($duration: 0.5s){
+  @at-root {
+    @include keyframes(flipOutY){
+      from {
+        transform: perspective(400px);
+      }
+
+      30% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+        opacity: 1;
+      }
+
+      to {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        opacity: 0;
+      }
+    };
+  }
+
+  @include animated($duration);
+  -webkit-animation-name: flipOutY;
+  animation-name: flipOutY;
+  backface-visibility: visible !important;;
+}

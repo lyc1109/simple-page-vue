@@ -1,0 +1,394 @@
+/* ----------------------------------------------
+ * 辅助工具类
+ * ---------------------------------------------- */
+// -----------------
+// 背景色
+.bg { background: $page_bg; }
+.bg-light { background: lighten($page_bg, 0.01); }
+.bg-gray { background: $gray-light; }
+.bg-white { background: $white; }
+.bg-gray-1{ background: $gray-light-1; }
+.bg-yellow-4 {
+  background: $yellow-4!important;
+  background-color: $yellow-4!important;
+}
+.bg-gradient {
+  @include box-shadow();
+  @extend %padding;
+
+  background-color: $primary;
+  background-image: -webkit-linear-gradient(top, $primary, $blue-1);
+  background-image: linear-gradient(to bottom, $primary, $blue-1);
+}
+
+// -----------------
+// 字体颜色
+.font-primary { color: $font-primary !important; }
+.font-light { color: $font-light !important; }
+.font-lighter { color: $font-lighter !important; }
+.font-white { color: $white !important; }
+
+// -----------------
+// 字体大小
+.font-default { @extend %font-size; }
+.font-s { @extend %font-size-s; }
+.font-m { @extend %font-size-m; }
+.font-l { @extend %font-size-l; }
+.font-xl { @extend %font-size-xl; }
+
+// -----------------
+// 字体粗细
+.font-bold { font-weight: bold !important; }
+.font-bold-300 { font-weight: 300 !important; }
+.font-bold-400 { font-weight: 400 !important; }
+.font-bold-500 { font-weight: 500 !important; }
+.font-bold-600 { font-weight: 600 !important; }
+.font-bold-700 { font-weight: 700 !important; }
+
+// -----------------
+// 图标大小
+.icon-default { @extend %icon-size; }
+.icon-m { @extend %icon-size-m; }
+.icon-l { @extend %icon-size-l; }
+.icon-xl { @extend %icon-size-xl; }
+.icon-xxl { @extend %icon-size-xxl; }
+
+// -----------------
+// 其它颜色
+.color-primary { color: $primary !important; }
+.color-primary-light { color: $primary-light !important; }
+.color-success { color: $success !important; }
+.color-warning { color: $warning !important; }
+.color-danger { color: $danger !important; }
+.color-danger-light { color: $danger-light !important; }
+.color-info { color: $info !important; }
+
+.color-red-1 { color: $red-1 !important;}
+.color-red-2 { color: $red-2 !important; }
+
+.color-blue-1 { color: $blue-1 !important; }
+.color-blue-2 { color: $blue-2 !important; }
+
+.color-darkblue-1 { color: $blue-dark-1 !important; }
+.color-darkblue-2 { color: $blue-dark-2 !important; }
+
+.color-orange-1 { color: $orange-1 !important; }
+.color-orange-2 { color: $orange-2 !important; }
+.color-orange-3 { color: $orange-3 !important; }
+.color-orange-4 { color: $orange-4 !important; }
+
+.color-green-1 { color: $green-1 !important; }
+.color-green-2 { color: $green-2 !important; }
+.color-green-3 { color: $green-3 !important; }
+.color-green-4 { color: $green-4 !important; }
+.color-green-5 { color: $green-5 !important; }
+.color-green-6 { color: $green-6 !important; }
+.color-green-7 { color: $green-7 !important; }
+
+.color-pink-1 { color: $pink-1 !important; }
+.color-pink-2 { color: $pink-2 !important; }
+
+.color-yellow-1 { color: $yellow-1 !important; }
+.color-yellow-2 { color: $yellow-2 !important; }
+
+.color-cyan { color: $info !important; }
+
+.color-white { color: $white !important; }
+
+.color-purple { color: $purple !important; }
+
+
+// -----------------
+// 对齐
+.valign-center { @extend %valign-center; }
+.valign-middle { vertical-align: middle !important; }
+.valign-bottom { vertical-align: bottom !important; }
+
+.align-center { text-align: center; }
+.align-right { text-align: right; }
+.align-left { text-align: left; }
+
+.inline {
+  display: inline;
+  vertical-align: middle;
+}
+.inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.block-center { margin: 0 auto; }
+
+.float-left { float: left; }
+.float-right { float: right; }
+.clearfixed { clear: both; }
+
+// -----------------
+// 文本断行
+.text-wrapper {
+  @extend %text-wrapper;
+  width: 100%;
+}
+.text-wrapper80 {
+  @extend %text-wrapper;
+  width: 80%;
+}
+.text-wrapper70 {
+  @extend %text-wrapper;
+  width: 70%;
+}
+//文本超出换行
+.text-wrapper-overline {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal!important;
+}
+
+.text-wrapper-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+// 超过2行隐藏
+.text-wrapper-2line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: initial!important;
+}
+
+.flex-center{
+  justify-content: center;
+}
+
+// -----------------
+// 边框
+.border { @include border(); }
+.border-top { @include border(top); }
+.border-left { @include border(left); }
+.border-right { @include border(right); }
+.border-bottom { @include border(bottom); }
+.border-white { @include border(all, $white); }
+.border-none { border-width: 0 !important; }
+
+.border-dashed { @include border-dashed(); }
+.border-dashed-top { @include border-dashed(top); }
+.border-dashed-left { @include border-dashed(left); }
+.border-dashed-right { @include border-dashed(right); }
+.border-dashed-bottom { @include border-dashed(bottom); }
+
+.border-radius { @include border-radius(3px); }
+.border-radius-circle { @include border-radius(50%); }
+
+// -----------------
+// 边距
+.padding-zero { padding: 0 !important; }
+.padding-top-zero { padding-top: 0 !important; }
+.padding-bottom-zero { padding-bottom: 0 !important; }
+.padding-left-zero { padding-left: 0 !important; }
+.padding-right-zero { padding-right: 0 !important; }
+
+
+.padding { @extend %padding; }
+.padding-s { @extend %padding-s; }
+.padding-m { @extend %padding-m; }
+.padding-l { @extend %padding-l; }
+.padding-xl { @extend %padding-xl; }
+.padding-xxl { @extend %padding-xxl; }
+
+// ---------------------
+// padding-top
+.padding-top { @extend %padding-top;}
+.padding-top-s { @extend %padding-top-s; }
+.padding-top-m { @extend %padding-top-m; }
+.padding-top-l { @extend %padding-top-l; }
+.padding-top-xl { @extend %padding-top-xl; }
+.padding-top-xxl { @extend %padding-top-xxl; }
+
+// ---------------------
+// padding-bottom
+.padding-bottom { @extend %padding-bottom; }
+.padding-bottom-s { @extend %padding-bottom-s; }
+.padding-bottom-m { @extend %padding-bottom-m; }
+.padding-bottom-l { @extend %padding-bottom-l; }
+.padding-bottom-xl { @extend %padding-bottom-xl; }
+.padding-bottom-xxl { @extend %padding-bottom-xxl; }
+
+// ---------------------
+// padding-left
+.padding-left { @extend %padding-left; }
+.padding-left-s { @extend %padding-left-s; }
+.padding-left-m { @extend %padding-left-m; }
+.padding-left-l { @extend %padding-left-l; }
+.padding-left-xl { @extend %padding-left-xl; }
+.padding-left-xxl { @extend %padding-left-xxl; }
+
+// ---------------------
+// padding-right
+.padding-right { @extend %padding-right; }
+.padding-right-s { @extend %padding-right-s; }
+.padding-right-m { @extend %padding-right-m; }
+.padding-right-l { @extend %padding-right-l; }
+.padding-right-xl { @extend %padding-right-xl; }
+.padding-right-xxl { @extend %padding-right-xxl; }
+
+
+// ---------------------
+// margin
+.margin { @extend %margin; }
+.margin-s { @extend %margin-s; }
+.margin-m { @extend %margin-m; }
+.margin-l { @extend %margin-l; }
+.margin-xl { @extend %margin-xl; }
+.margin-xxl { @extend %margin-xxl; }
+.margin-zero { margin: 0 !important; }
+
+// ---------------------
+// margin-top
+.margin-top { @extend %margin-top; }
+.margin-top-s { @extend %margin-top-s; }
+.margin-top-m { @extend %margin-top-m; }
+.margin-top-l { @extend %margin-top-l; }
+.margin-top-xl { @extend %margin-top-xl; }
+.margin-top-xxl { @extend %margin-top-xxl; }
+.margin-top-zero { margin-top: 0 !important; }
+
+// ---------------------
+// margin-bottom
+.margin-bottom { @extend %margin-bottom; }
+.margin-bottom-s { @extend %margin-bottom-s; }
+.margin-bottom-m { @extend %margin-bottom-m; }
+.margin-bottom-l { @extend %margin-bottom-l; }
+.margin-bottom-xl { @extend %margin-bottom-xl; }
+.margin-bottom-xxl { @extend %margin-bottom-xxl; }
+.margin-bottom-zero { margin-bottom: 0 !important; }
+
+// ---------------------
+// margin-left
+.margin-left { @extend %margin-left; }
+.margin-left-s { @extend %margin-left-s; }
+.margin-left-m { @extend %margin-left-m; }
+.margin-left-l { @extend %margin-left-l; }
+.margin-left-xl { @extend %margin-left-xl; }
+.margin-left-xxl { @extend %margin-left-xxl; }
+.margin-left-zero { margin-left: 0 !important; }
+
+// ---------------------
+// margin-right
+.margin-right { @extend %margin-right; }
+.margin-right-s { @extend %margin-right-s; }
+.margin-right-m { @extend %margin-right-m; }
+.margin-right-l { @extend %margin-right-l; }
+.margin-right-xl { @extend %margin-right-xl; }
+.margin-right-xxl { @extend %margin-right-xxl; }
+.margin-right-zero { margin-right: 0 !important; }
+
+
+// -----------------
+// 高度全屏
+.full-height{
+  min-height: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.full-width{
+ width: 100%;
+}
+.full-screen{
+  height: 100%;
+  width: 100%;
+}
+
+// -----------------
+// 水纹效果
+.ripple {
+  @extend %ripple;
+}
+
+
+// -----------------
+// 横线
+hr{
+  border: none;
+  height: rem(1px);
+  background-color: $border;
+  margin: rem(15px) 0;
+}
+
+
+// -----------------
+// 阴影
+.box-shadow {
+  @include box-shadow();
+}
+
+// -----------------
+// 标题
+.text-title{
+  color: $font-title;
+  font-weight: 500;
+  font-size: $font-size-m;
+}
+
+//背景图
+.bg-image {
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+}
+
+//页面底部
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  background-color: $white;
+  z-index: 10;
+  @include border(top, $border-dark);
+}
+
+// 右侧更多图标
+.more-icon{
+  @extend %more-icon;
+}
+
+//搜索框
+
+.key-box {
+  padding: rem($s);
+  background: lighten($page_bg, 4%);
+  @include border-radius(35px);
+  .key-input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: lighten($page_bg, 4%);
+  }
+  .iconfont {
+    color: lighten($font-lighter,13%);
+  }
+}
+
+// 数字字体
+.font-family-num {
+  font-family: Tahoma !important;
+}
+
+// diabled-btn
+.disabled-btn {
+  background: $font-lighter!important;
+  border-color: $font-lighter!important;
+  color: $white!important;
+}
+
+.hidden{
+  display: none;
+}

@@ -1,0 +1,29 @@
+.cell-group{
+  @include border(bottom);
+  @include border(top);
+  @extend %padding-left-m;
+  background-color: $white;
+}
+
+.cell-item {
+  color: $font-primary;
+  min-height: rem(30px);
+  padding: rem(9px) 0;
+  @include border(bottom);
+
+  &:last-child{
+    border-bottom: none;
+  }
+}
+
+// -----------------------------------
+// mint-ui 覆写
+
+.mint-cell-value.is-link{
+  margin-right: rem(15px);
+}
+
+.mint-cell-allow-right::after{
+  right: rem(11px);
+  top: 51%;
+}

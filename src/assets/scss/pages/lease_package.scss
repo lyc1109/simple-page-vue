@@ -1,0 +1,59 @@
+.rental-package{
+  float: left;
+  width: 45%;
+  text-align: center;
+  margin-right: 12px;
+  margin-bottom: 10px;
+
+  .rental-package-header{
+    padding: 7px;
+    background: $gray;
+    border-bottom: 1px dashed $white;
+    font-size: $font-size-s;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .rental-package-body{
+    height: 45px;
+    padding: 7px;
+    border: 1px solid $border;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 10px 5px -8px $gray;
+    margin-top: -1px;
+    margin-bottom: 3px;
+
+    h3{ margin-bottom: 0}
+  }
+}
+
+.rental-package-danger {
+  color: $danger;
+  .rental-package-header{
+    color: $white;
+    background: $danger;
+  }
+}
+.rental-package-warn {
+  color: $warning;
+  .rental-package-header{
+    color: $white;
+    background: $warning;
+  }
+}
+.rental-package-primary {
+  color: $primary;
+  .rental-package-header{
+    color: $white;
+    background: $primary;
+  }
+}
+.rental-package-success {
+  color: $success;
+  .rental-package-header{
+    color: $white;
+    background: $success;
+  }
+}

@@ -1,0 +1,80 @@
+.circleBar{
+  position: relative;
+
+  span {
+    position: absolute;
+    font-size: $font-size-s;
+    color: #fff;
+  }
+
+  .startPoint{
+    -webkit-transform: rotate(-85%, 10%);
+    -moz-transform: rotate(-85%, 10%);
+    -ms-transform: rotate(-85%, 10%);
+    -o-transform: rotate(-85%, 10%);
+    transform: translate(-85%, 10%);
+    left: 38%;
+  }
+  .endPoint{
+    -webkit-transform: rotate(-25%, 10%);
+    -moz-transform: rotate(-25%, 10%);
+    -ms-transform: rotate(-25%, 10%);
+    -o-transform: rotate(-25%, 10%);
+    transform: translate(-25%, 10%);
+    left: 62%;
+  }
+
+  .realPoint{
+    position: absolute;
+    top: 0;
+    left: 47%;
+    width: 16px;
+    height: 31%;
+    padding-top: 28px;
+    transform-origin: bottom center;
+
+    img {
+      display: block;
+      position: relative;
+      color: #fff000;
+      width: 16px;
+      height: 16px;
+      @include rotate(220deg);
+    }
+  }
+}
+
+.circleBar .circleBar-content{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  text-align: center;
+  background-color: transparent;
+  font-size: 30px;
+  @extend %valign-center;
+
+  div{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  #circleBarProgress{
+    margin: 0;
+    color: #fff;
+    font-size: rem(40px);
+    font-weight: 500;
+
+    span{
+      position: relative;
+    }
+  }
+
+  .subtitle{
+    font-size: $font-size-s;
+    margin-top: -5px;
+    color: #fff;
+  }
+}

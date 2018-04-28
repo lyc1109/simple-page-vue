@@ -1,0 +1,161 @@
+.orders{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li{
+    background-color: $white;
+    padding: 15px 10px;
+    @include border(bottom);
+
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}
+
+.orders .order-info{
+  @extend %padding-bottom;
+  @extend %margin-bottom;
+  border-bottom: 1px dashed #f2f2f2;
+
+  .product-cover-img{
+    float: left;
+    width: 60px;
+    height: 45px;
+    @include border-radius();
+  }
+
+  .product-info{
+    vertical-align: middle;
+    //padding-left: 60px;
+
+    .text-s{
+      margin-top: 6px;
+    }
+  }
+}
+
+.orders .order-field{
+  /*font-size: 12px;*/
+
+  .pull-right{
+    width: 90px;
+    text-align: center;
+    @extend %text-wrapper;
+  }
+}
+
+.orders .order-foot{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #f2f2f2;
+  height: 38px;
+
+  .pull-right{
+    width: 70px;
+    text-align: center;
+
+    .btn{
+      width: 100%;
+      //padding: 5px 0;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  .text-second{
+    padding-top: 8px;
+  }
+}
+
+hr.dash {
+  background-color: #fff;
+  border-top: 1px dashed #f2f2f2;
+}
+.list-container .list-item {
+  border-bottom: 1px solid #f2f2f2;
+  position: relative;
+  padding: 15px!important;
+}
+
+//租赁产品
+.swiper-slide{
+  position: relative;
+
+  .title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    padding: 5px 50px 5px 5px;
+    background-color: rgba(0, 0, 0, .3);
+    @extend %text-wrapper;
+  }
+}
+.swiper-pagination-custom{
+  bottom: 0;
+  text-align: right;
+  color: $white;
+  padding: 5px;
+}
+
+.leaseScenesTab {
+  width: 100%;
+  height: 49px;
+  z-index: 2000;
+  overflow: hidden;
+  background: $white;
+  @include border(bottom);
+
+  .tab-container{
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+
+    .tab-item{
+      display: inline-block;
+
+      a{
+        display: block;
+        padding: 10px 20px;
+        font-size: $m;
+        font-weight: 400;
+        color: $font-light;
+      }
+    }
+    .tab-item-50{
+      width: 50%;
+      text-align: center;
+    }
+    .tab-item-33{
+      width: 33%;
+      text-align: center;
+    }
+
+    .tab-item.active {
+      border-bottom: 3px solid $orange-2;
+
+      a{
+        color: $primary;
+      }
+    }
+  }
+}
+
+.divider{
+  padding: 10px 0 10px 15px;
+  font-size: $m;
+  @include border();
+  background-color: $page_bg;
+  position: relative;
+
+  &:before{
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    content: " ";
+    height: 22px;
+    border-left: 5px solid $primary;
+  }
+}

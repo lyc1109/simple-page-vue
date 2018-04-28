@@ -1,0 +1,40 @@
+// ------------------------------------------
+// 标签组件
+
+.label {
+  @extend %font-size-s;
+  @include border-radius(3px);
+
+  display: inline-block;
+  padding: rem(2px) rem(6px);
+  line-height: 1.4;
+}
+
+.label-round{
+  @include border-radius(12px);
+}
+
+.label-primary{
+  background-color: $primary;
+  color: $white;
+}
+.label-success{
+  background-color: $success;
+  color: $white;
+}
+.label-danger{
+  background-color: $danger;
+  color: $white;
+}
+.label-warn{
+  background-color: $warning;
+  color: $white;
+}
+.label-info{
+  background-color: $info;
+  color: $white;
+}
+.label-cyan{
+  background-color: $cyan;
+  color: $white;
+}

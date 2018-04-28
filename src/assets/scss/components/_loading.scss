@@ -1,0 +1,22 @@
+// 对话框样式
+// 基于mint-ui > Indicator 调整
+
+
+.mint-indicator{
+  .mint-indicator-mask{
+    z-index: 8000;
+  }
+  .mint-indicator-wrapper{
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9000;
+
+    .mint-indicator-spin div{
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+
+  .mint-indicator-text{
+    font-size: $font-size-s;
+  }
+}

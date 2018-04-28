@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# 获取脚本绝对路径
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $scriptPath
+cd ../../
+
+echo "脚本目录：$scriptPath"
+
+## ================================================================================================
+## 相关信息变量定义
+# 发布日期
+version=`date +%y%m%d%H%M`
+
+# 发布文件输出目录
+outputFolder="$scriptPath/output"
+# 应用名称
+appName="iotp-h5"
+# 应用包名称
+packageName="iotp-h5.tar.gz"
+# 发布目录
+publishDir="/usr/local/iotapps"
+# 发布目录
+appDir="/usr/local/iotapps/${appName}"
+## ================================================================================================
+
+# 异常处理函数
+# @param $1 执行动作描述
+# @param $2 执行结果
+function assertFail(){
+    if [ $2 != "0" ]; then
+        echo "$1 执行失败 ";
+        # 退出脚本
+        exit 1;
+    fi
+}
+
+## 编译打包
+cnpm install
+npm run build-test
+
+assertFail 'npm 编译打包' $?
+
+## ================================================================================================
+# 拷贝文件到新目录
+
+if [ -d ${outputFolder} ]; then
+  rm -rf ${outputFolder}
+fi
+mkdir ${outputFolder}
+
+cp -rf ./dist/* ${outputFolder}
+assertFail "cp files to ${outputFolder}" $?
+
+cd ${outputFolder}
+
+# 压缩dist文件夹
+tar -czf ${packageName} ./*
+## ================================================================================================
+
+
+
+if [ ! -d ${publishDir} ]; then
+     mkdir -p ${publishDir}
+fi
+
+# 每个应用目录下都要主要(master)、次要(slave)两个存储目录，分别对应着2个docker容器挂载目录
+if [ ! -d ${appDir} ]; then
+    mkdir -p ${appDir}
+    assertFail "mkdir ${appDir}" $?
+
+    mkdir -p ${appDir}/html
+    mkdir -p ${appDir}/logs && mkdir -p ${appDir}/bak
+    assertFail "mkdir master dirs" $?
+fi
+
+echo "清理旧版本文件，复制解压新版本"
+rm -rf ${appDir}/html/*
+rm -rf ${appDir}/logs/*
+assertFail "remove files" $?
+
+cp ${packageName} ${appDir}
+assertFail "cp ${packageName} ${appDir}" $?
+
+tar -xzvf ${appDir}/${packageName} -C ${appDir}/html
+assertFail "unzip ${packageName}" $?
+
+
+
+echo "停止删除容器：${appName}"
+containerId=$(docker ps -a|grep ${appName}|awk '{print $1}')
+if [[ ${containerId} != "" ]]; then
+    docker stop ${appName} && docker rm ${appName}
+fi
+
+
+docker run --name=${appName} -d \
+-p 8500:80 \
+-v ${appDir}/html:/usr/share/nginx/html \
+-v ${appDir}/logs:/var/log/nginx \
+hucw/nginx:1.0

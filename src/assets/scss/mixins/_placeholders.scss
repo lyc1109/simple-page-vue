@@ -1,0 +1,166 @@
+/* ----------------------------------------------
+ * 通用代码块
+ * ---------------------------------------------- */
+
+// ---------------------
+// 字体大小
+%font-size{ @include font-size($font-size); }
+%font-size-s{ @include font-size($font-size-s); }
+%font-size-m{ @include font-size($font-size-m); }
+%font-size-l{ @include font-size($font-size-l); }
+%font-size-xl{ @include font-size($font-size-xl); }
+
+// ---------------------
+// 字体图标大小
+%icon-size{ @include font-size($icon-size); }
+%icon-size-m{ @include font-size($icon-size-m); }
+%icon-size-l{ @include font-size($icon-size-l); }
+%icon-size-xl{ @include font-size($icon-size-xl); }
+%icon-size-xxl{ @include font-size($icon-size-xxl); }
+
+// ---------------------
+// padding，使用衣服尺码作为大小标识
+%padding{ padding: rem($s) !important; }
+%padding-s{ padding: rem($xs) !important; }
+%padding-m{ padding: rem($m) !important; }
+%padding-l{ padding: rem($l) !important; }
+%padding-xl{ padding: rem($xl) !important; }
+%padding-xxl{ padding: rem($xxl) !important; }
+
+// ---------------------
+// padding-top
+%padding-top{ padding-top: rem($s) !important; }
+%padding-top-s{ padding-top: rem($xs) !important; }
+%padding-top-m{ padding-top: rem($m) !important; }
+%padding-top-l{ padding-top: rem($l) !important; }
+%padding-top-xl{ padding-top: rem($xl) !important; }
+%padding-top-xxl{ padding-top: rem($xxl) !important; }
+
+// ---------------------
+// padding-bottom
+%padding-bottom{ padding-bottom: rem($s) !important; }
+%padding-bottom-s{ padding-bottom: rem($xs) !important; }
+%padding-bottom-m{ padding-bottom: rem($m) !important; }
+%padding-bottom-l{ padding-bottom: rem($l) !important; }
+%padding-bottom-xl{ padding-bottom: rem($xl) !important; }
+%padding-bottom-xxl{ padding-bottom: rem($xxl) !important; }
+
+// ---------------------
+// padding-left
+%padding-left{ padding-left: rem($s) !important; }
+%padding-left-s{ padding-left: rem($xs) !important; }
+%padding-left-m{ padding-left: rem($m) !important; }
+%padding-left-l{ padding-left: rem($l) !important; }
+%padding-left-xl{ padding-left: rem($xl) !important; }
+%padding-left-xxl{ padding-left: rem($xxl) !important; }
+
+// ---------------------
+// padding-right
+%padding-right{ padding-right: rem($s) !important; }
+%padding-right-s{ padding-right: rem($xs) !important; }
+%padding-right-m{ padding-right: rem($m) !important; }
+%padding-right-l{ padding-right: rem($l) !important; }
+%padding-right-xl{ padding-right: rem($xl) !important; }
+%padding-right-xxl{ padding-right: rem($xxl) !important; }
+
+// ---------------------
+// margin
+%margin{ margin: rem($s) !important; }
+%margin-s{ margin: rem($xs) !important; }
+%margin-m{ margin: rem($m) !important; }
+%margin-l{ margin: rem($l) !important; }
+%margin-xl{ margin: rem($xl) !important; }
+%margin-xxl{ margin: rem($xxl) !important; }
+
+// ---------------------
+// margin-top
+%margin-top{ margin-top: rem($s) !important; }
+%margin-top-s{ margin-top: rem($xs) !important; }
+%margin-top-m{ margin-top: rem($m) !important; }
+%margin-top-l{ margin-top: rem($l) !important; }
+%margin-top-xl{ margin-top: rem($xl) !important; }
+%margin-top-xxl{ margin-top: rem($xxl) !important; }
+
+// ---------------------
+// margin-bottom
+%margin-bottom{ margin-bottom: rem($s) !important; }
+%margin-bottom-s{ margin-bottom: rem($xs) !important; }
+%margin-bottom-m{ margin-bottom: rem($m) !important; }
+%margin-bottom-l{ margin-bottom: rem($l) !important; }
+%margin-bottom-xl{ margin-bottom: rem($xl) !important; }
+%margin-bottom-xxl{ margin-bottom: rem($xxl) !important; }
+
+// ---------------------
+// margin-left
+%margin-left{ margin-left: rem($s) !important; }
+%margin-left-s{ margin-left: rem($xs) !important; }
+%margin-left-m{ margin-left: rem($m) !important; }
+%margin-left-l{ margin-left: rem($l) !important; }
+%margin-left-xl{ margin-left: rem($xl) !important; }
+%margin-left-xxl{ margin-left: rem($xxl) !important; }
+
+// ---------------------
+// margin-right
+%margin-right{ margin-right: rem($s) !important; }
+%margin-right-s{ margin-right: rem($xs) !important; }
+%margin-right-m{ margin-right: rem($m) !important; }
+%margin-right-l{ margin-right: rem($l) !important; }
+%margin-right-xl{ margin-right: rem($xl) !important; }
+%margin-right-xxl{ margin-right: rem($xxl) !important; }
+
+// ---------------------
+// 元素对齐
+// 垂直居中
+%valign-center{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+     -ms-flex-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+
+%align-center{
+  text-align: center;
+}
+
+
+// ---------------------
+// 背景居中显示
+%bg{
+  background: url('/static/images/placeholder.png') no-repeat;
+  background-size: cover;
+}
+
+// ---------------------
+// 文本不换行 、 强制换行
+%text-wrapper{
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// ---------------------
+// 点击水纹效果
+%ripple {
+  @include ripple();
+}
+
+%more-icon{
+  &:before,&:after{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: rem(-2px);
+    border: rem(7.5px) solid transparent;
+    border-left: rem(7.5px) solid $font-light;
+    top: rem(4px);
+  }
+  &:after{
+    border-left-color: #fff;
+    right: 0;
+  }
+}

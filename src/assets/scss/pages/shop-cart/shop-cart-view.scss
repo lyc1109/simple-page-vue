@@ -1,0 +1,112 @@
+@import "~variables";
+#v-shop-cart-view{
+    .shop-cart-title{
+      line-height: 2;
+      font-size: rem(20px);
+      color:#333;
+      @include border(top,$border);
+      @include border(bottom,$border);      
+    }
+    .no_product{
+      i{
+        @include scale(3);
+      }
+    }
+    .each-good{
+      border-bottom: rem(8px) solid $border;
+      width: 100%;
+      box-sizing: border-box;
+      .flexbox{
+        display: flex;
+        align-items: flex-start;
+        .inline-flex{
+          display: inline-flex;
+          align-items: center;
+          .img{
+            margin: 0 rem(10px);
+          }
+        }
+        .detail{
+          flex: 1;
+          .contain{
+            height: rem(80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+          }
+          .name{
+            color: #2D2D2D;
+            font-size: $font-size-m;
+            font-weight: bold;
+            line-height: 1.2;
+          }
+          .type{
+            color: #aeaeae;
+            font-size: $font-size;            
+          }       
+          .trial{
+            display: flex;
+            justify-content: space-between;
+            .mint-switch{
+              @include scale(.7);
+              display: inline-block;
+              vertical-align: middle;
+            }
+            .current-price{
+              color: $danger;
+              font-weight: bold;
+              font-size: $font-size-l;
+            }
+            .origin-price{
+              text-decoration: line-through;
+              color: #aeaeae;
+            }
+            .trial-price{
+              color: $danger;            
+            }
+            span{
+              color: #111;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+    footer{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      min-height: rem(40px);
+      @include border(top, $border);      
+      .calculate{
+        width: rem(280px);
+        background-color: $white;        
+        padding: 0 10px;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        .calc-left{
+          span{
+            font-size: 15px;          
+          }
+        }
+        .calc-right{
+          font-weight: bold;
+          font-size: $font-size-m;
+          .num{
+            color: $danger;
+          }
+        }
+      }
+      .calc-btn{
+        flex: 1;
+        background-color: $danger;
+        color: $white;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }

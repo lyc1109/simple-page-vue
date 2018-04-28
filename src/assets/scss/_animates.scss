@@ -1,0 +1,40 @@
+/**
+ * 动画辅助样式，参考：https://github.com/daneden/animate.css
+ */
+
+.fadeIn {
+  @include fadeIn();
+}
+.fadeOut {
+  @include fadeOut();
+}
+
+.fadeInLeft {
+  @include fadeInLeft();
+}
+.fadeInRight {
+  @include fadeInRight();
+}
+
+.fadeOutLeft {
+  @include fadeOutLeft();
+}
+.fadeOutRight {
+  @include fadeOutRight();
+}
+
+.slideInRight {
+  @include slideInRight();
+}
+.slideOutRight {
+  @include slideOutRight()
+}
+.slideInUp {
+  @include slideInUp();
+}
+.slideInDown {
+  @include slideInDown();
+}
+.slideOutUp {
+  @include slideOutUp();
+}

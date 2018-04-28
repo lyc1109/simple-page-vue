@@ -1,0 +1,54 @@
+// 弱消息提示
+// 基于开源组件Toasted：https://github.com/shakee93/vue-toasted样式调整
+.iotp-toasted.bottom-center{
+  bottom: 10%;
+
+  .toasted{
+    font-size: $font-size-s !important;
+    max-width: 320px;
+  }
+
+  .success{
+    background-color: $success;
+
+    i {
+      margin-top: 2px;
+      font-size: 20px;
+    }
+  }
+}
+
+
+
+
+// ------------------------
+.et-wrapper.toast{
+  max-width: 100%;
+  border-radius: 3px;
+}
+
+.et-wrapper.toast-success{
+  color: $white;
+  background-color: $success;
+}
+
+.et-wrapper.toast-error{
+  color: $white;
+  background-color: $danger;
+}
+
+.et-wrapper.toast-info{
+  color: $white;
+  background-color: $info;
+}
+
+.et-wrapper.toast-warn{
+  color: $white;
+  background-color: $warning;
+}
+
+
+.et-wrapper.toast-bottom{
+  bottom: rem(70px) !important;
+  border-radius: 20px;
+}

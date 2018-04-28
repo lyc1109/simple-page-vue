@@ -1,0 +1,9 @@
+diff a/src/assets/scripts/wechat.js b/src/assets/scripts/wechat.js	(rejected hunks)
+@@ -171,7 +171,6 @@
+       return;
+     }
+     this._getWx().invoke('configWXDeviceWiFi', {}, function(res){
+-      alert(JSON.stringify(res));
+       callbackFn && callbackFn.call(res);
+     })
+   },

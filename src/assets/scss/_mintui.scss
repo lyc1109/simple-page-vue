@@ -1,0 +1,746 @@
+// -------------------------------------------
+// mint-ui覆写
+
+.mint-cell-wrapper {
+  font-size: $font-size;
+  align-items: center;
+  background-image: none;
+}
+
+.mint-cell, .mint-cell-wrapper{
+  background-image: none !important;
+}
+.mint-cell{
+  min-height: 52px;
+}
+.mint-cell-wrapper{
+  padding: 0;
+
+  .mint-cell-title{
+    padding-top: 6px;
+  }
+}
+
+.mint-checklist-title,
+.mint-radiolist-title{
+  display: none;
+}
+
+.mint-checklist-label,
+.mint-radiolist-label{
+  padding-left: 0;
+  padding-right: rem(3px);
+  @include ripple(darken($gray-light, 20%));
+}
+
+.mint-checkbox-core::after {
+  top: rem(4px);
+  left: rem(7px);
+}
+
+
+
+.form-group .mint-cell-wrapper{
+  padding-left: 0;
+  //padding-right: $m;
+}
+
+.form-field.required .mint-cell-title .mint-cell-text:after {
+  content: "*";
+  color: $red-1;
+}
+
+
+.v-modal {
+  @include opacity();
+}
+
+
+// -----------------------------------
+// swiper
+
+.mint-swipe-indicators {
+  /*left: auto;
+  right: rem(5px);*/
+  bottom: rem(5px);
+  /*transform: none;*/
+
+  .mint-swipe-indicator.is-active{
+    opacity: 1;
+    background: #FF6001;
+  }
+}
+
+// -----------------------------------
+// 待清理样式
+//my-radio
+@mixin cell{
+  min-height: 30px;
+  margin-right: 15px;
+}
+@mixin male-selected-wrap{
+  background-color: #32a8ee;
+  border-radius: 20px;
+  padding: 0 5px;
+}
+@mixin female-selected-wrap{
+  background-color: pink;
+  border-radius: 20px;
+  padding: 0 5px;
+}
+@mixin wrap{
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 0 5px;
+  border: 1px solid #ccc;
+}
+@mixin selected-text{
+  color: #fff;
+}
+@mixin label-margin{
+  margin-left: 0!important;
+}
+@mixin text{
+  color: #ccc;
+  margin-left: 0!important;
+}
+@mixin male-img{
+  background: url("/static/images/my/edit/male.png") no-repeat;
+  background-size: 19px;
+  border: 0 none;
+}
+@mixin male-selected-img{
+  background: url("/static/images/my/edit/male-selected.png") no-repeat;
+  background-size: 19px;
+}
+@mixin female-img{
+  background: url("/static/images/my/edit/female.png") no-repeat;
+  background-size: 19px;
+  border: 0 none;
+}
+@mixin female-selected-img{
+  background: url("/static/images/my/edit/female-selected.png") no-repeat;
+  background-size: 19px;
+}
+@mixin after{
+  background-color: transparent;
+}
+
+// 性别选择
+.maleBox{
+  .mint-cell{
+    @include cell;
+
+    &:nth-child(2) {
+      .mint-cell-wrapper {
+        @include male-selected-wrap;
+
+        .mint-cell-title{
+          .mint-radiolist-label{
+            @include selected-text;
+
+            .mint-radio-core{
+              @include male-img;
+
+              &:after{
+                @include after;
+              }
+            }
+            .mint-radio-input:checked + .mint-radio-core{
+              @include male-selected-img;
+            }
+            .mint-radio-label{
+              @include label-margin;
+            }
+          }
+        }
+      }
+    }
+    &:nth-child(3) {
+      .mint-cell-wrapper {
+       @include wrap;
+
+        .mint-cell-title{
+          .mint-radiolist-label{
+            @include text;
+
+            .mint-radio-core{
+              @include female-img;
+
+              &:after{
+                @include after;
+              }
+            }
+            .mint-radio-input:checked + .mint-radio-core{
+              @include female-selected-img;
+            }
+            .mint-radio-label{
+              @include label-margin;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.femaleBox{
+  .mint-cell{
+    @include cell;
+
+    &:nth-child(2) {
+      .mint-cell-wrapper {
+        @include wrap;
+
+        .mint-cell-title{
+          .mint-radiolist-label{
+            @include text;
+
+            .mint-radio-core{
+              @include male-img;
+
+              &:after{
+                @include after;
+              }
+            }
+            .mint-radio-input:checked + .mint-radio-core{
+              @include male-selected-img;
+            }
+            .mint-radio-label{
+              @include label-margin;
+            }
+          }
+        }
+      }
+    }
+    &:nth-child(3) {
+      .mint-cell-wrapper {
+        @include female-selected-wrap;
+
+        .mint-cell-title{
+          .mint-radiolist-label{
+            @include selected-text;
+
+            .mint-radio-core{
+              @include female-img;
+
+
+              &:after{
+                @include after;
+              }
+            }
+            .mint-radio-input:checked + .mint-radio-core{
+              @include female-selected-img;
+            }
+            .mint-radio-label{
+              @include label-margin;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.sexTit{
+  .flex-item{
+    flex: inherit!important;
+    width: 105px;
+  }
+}
+
+//nav
+.mint-navbar{
+  @include border;
+  position: fixed;
+  width: 100%;
+  background: $white;
+  z-index: 999;
+}
+
+//message-box
+.mint-msgbox-message{
+  font-size: $font-size-m;
+  color: #333;
+}
+
+//充值缴费
+.rechargeCard {
+  .mint-cell {
+    position: absolute;
+    top: 0px;
+    width: 48%;
+    background: $transparent;
+
+    .mint-cell-wrapper {
+      width: 100%;
+      text-align: center;
+      height: 140px;
+
+      .mint-radiolist-label {
+        padding-right: 0;
+
+        .mint-radio-label {
+          display: none;
+        }
+        .mint-radio-core {
+          margin-top: 110px;
+          border-color: $yellow-3;
+        }
+        .mint-radio-input:checked + .mint-radio-core {
+          background: $transparent;
+          border-color: $yellow-3;
+
+          &:after {
+            background: $yellow-3;
+          }
+        }
+      }
+    }
+
+    &:nth-child(3), &:nth-child(5) {
+      right: 0;
+    }
+    &:nth-child(4), &:nth-child(5) {
+      top: 36%;
+    }
+    &:nth-child(6){
+      top: 72%;
+    }
+    &:nth-child(3) {
+      .mint-radio-core{
+        border-color: $green-5!important;
+      }
+      .mint-radio-input:checked + .mint-radio-core {
+        border-color: $green-5!important;
+
+        &:after {
+          background-color: $green-5!important;
+        }
+      }
+    }
+    &:nth-child(4) {
+      .mint-radio-core{
+        border-color: $green-6!important;
+      }
+      .mint-radio-input:checked + .mint-radio-core {
+        border-color: $green-6!important;
+
+        &:after {
+          background: $green-6!important;
+        }
+      }
+    }
+    &:nth-child(5) {
+      .mint-radio-core{
+        border-color: $primary!important;
+      }
+      .mint-radio-input:checked + .mint-radio-core {
+        border-color: $primary!important;
+
+        &:after {
+          background: $primary!important;
+        }
+      }
+    }
+  }
+}
+
+// 订单评价
+.evaluateContents {
+  .mint-field-core {
+    @include border;
+    padding: $s;
+    @include border-radius;
+  }
+}
+
+//进度条
+.mt-progress-runway,.mt-progress-progress {
+  @include border-radius(50px);
+}
+.mt-progress-progress {
+  height: 8px!important;
+}
+
+//设备详情
+.filter-num{
+  .redProgress{
+    .mt-progress-runway{
+      background: rgba(255, 0, 0, 0.2);
+    }
+    .mt-progress-progress{
+      background: #ee4242;
+    }
+  }
+  .greenProgress{
+    .mt-progress-runway{
+      background: rgba(24, 186, 29, 0.2);
+    }
+    .mt-progress-progress{
+      background: $green-1;
+    }
+  }
+  .yellowProgress{
+    .mt-progress-runway{
+      background: rgba(240, 173, 78, 0.2);
+    }
+    .mt-progress-progress{
+      background: $yellow-1;
+    }
+  }
+}
+//滤芯详情
+.available-date{
+  .mt-progress-runway{
+    background: rgba(255, 0, 0, 0.2);
+  }
+  .mt-progress-progress{
+    background: #ee4242;
+  }
+}
+
+//person-field
+.user-info-field {
+  .info-group {
+    @extend %padding-left-m;
+    background: white;
+    .info-field-item {
+      @extend %padding-m;
+      padding-left: 0!important;
+      @include border(bottom);
+      &:last-child {
+        border: none;
+      }
+
+      .info-title {
+        @extend %padding-right-m;
+        min-width: rem(60px);
+        color: $font-light;
+        display: inline-block;
+      }
+
+      input[type=text],input[type=tel],input[type=email] {
+        width: calc(100% - 10px);
+        padding: 5px;
+        border: none;
+      }
+
+      .sex-box {
+        padding: rem(5px) rem(10px);
+        color: $font-light;
+        &:last-child {
+          margin-left: $m;
+        }
+        @include border(all);
+        @include border-radius(20px);
+        input[name=sex] {
+          position: absolute;
+          z-index: 999;
+          width: rem(50px);
+          opacity: 0;
+        }
+        span {
+          padding-left: $xs;
+        }
+
+        &.current {
+          background: $primary;
+          color: white;
+        }
+      }
+    }
+  }
+  .mint-cell {
+    min-height: inherit;
+    padding: rem($m)!important;
+    padding-left: 0!important;
+
+    .mint-cell-title {
+      min-width: rem(60px);
+      width: auto;
+      padding-right: rem($m);
+      color: $font-light;
+    }
+    .mint-cell-wrapper {
+      padding: 0;
+    }
+  }
+}
+
+//添加设备搜索框
+.device-search{
+  .mint-field-core{
+    padding-left: 15px;
+  }
+  .mint-field-other{
+    position: absolute;
+    left: 0;
+    right: auto;
+    top: 15px;
+  }
+}
+//添加设备单选框
+.selectBtn{
+  .mint-radiolist {
+    margin-top: 15px;
+
+    .mint-cell-wrapper {
+      padding: 0;
+
+      .mint-radio-label {
+        display: none;
+      }
+    }
+  }
+}
+.device-parts{
+  .mint-cell{
+    background: none;
+  }
+}
+
+//右滑组件
+.cell-swipe {
+  .mint-cell-wrapper {
+    .mint-cell-title {
+      display: none;
+    }
+    .mint-cell-value{
+      width: 100%;
+
+      .flex{
+        width: 100%;
+      }
+    }
+  }
+  .mint-cell-swipe-button{
+    line-height: rem(78px);
+  }
+}
+
+.form-field{
+  .mint-field-core{
+    background: #fff;
+  }
+}
+
+.g-core-image-upload-form{
+  height: rem(150px)!important;
+}
+.slot1{
+  font-size: $font-size-m;
+}
+.product-rent{
+  .flex {
+    & > .flex-item {
+      //flex: 0 0 40%;
+    }
+  }
+  .cell-value{
+    //flex: 1;
+    margin-left: rem(20px);
+    text-align: left!important;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+// 弹出框
+.leases,.orderLog {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  .log-box {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .log-item-box {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .title {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    span {
+      color: #444;
+      font-size: $font-size-m;
+    }
+    i {
+      color: #ccc;
+      position: fixed;
+      right: 1.15385rem;
+    }
+  }
+  &>p{
+    line-height: rem(23px);
+    height: 100%;
+    overflow: scroll;
+  }
+  .btn{
+    position: fixed;
+    bottom: 0;
+    border-radius: inherit;
+    height: 45px;
+  }
+  .detail-box {
+    position: relative;
+    padding-top: 0;
+    height: 100%;
+    overflow: auto;
+  }
+  .order-log-detail{
+    position: relative;
+    padding: 0;
+    background: white;
+    margin-bottom: rem(90px);
+    min-height: calc(100% - 120px);
+    &:before{
+      position: absolute;
+      top: rem(22px);
+      left: rem(20px);
+      height: 100%;
+      content: '';
+      display: inline-block;
+      width: 1px;
+      background: rgba($gray,.7);
+    }
+    ul {
+      li{
+        position: relative;
+        overflow: initial;
+
+        span{
+          display: inline-block;
+          margin-left: 20px;
+        }
+        &.active{
+          color: $primary;
+          font-weight: 400;
+          font-size: 14px;
+        }
+        i{
+          position: absolute;
+          top: 4px;
+
+          &.done {
+            background: rgba($gray,.7);
+            @include border-radius(50%);
+            width: rem(5px);
+            height: rem(5px);
+            display: inline-block;
+            left: rem(3px);
+            top: rem(8px);
+          }
+          &.icon-iot-time {
+            color: $primary;
+            left: rem(-2px);
+            top: 0;
+          }
+        }
+        &:last-child{
+          &:before{
+            width: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 服务订单tab
+.service-order-nav{
+  .mint-tab-item-label{
+    font-size: rem(14px);
+  }
+}
+.add-num{
+  .cell-title,.cell-value{
+    color: $red-1!important;
+  }
+}
+
+.lease-page .mint-navbar {
+  .mint-tab-item {
+    .mint-tab-item-label {
+      font-size: rem(14px);
+    }
+    &.is-selected {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.agreement{
+  .agree{
+    .mint-checklist{
+      .mint-checkbox-label{
+        color: $primary;
+      }
+    }
+  }
+}
+//选择器
+.picker-item{
+  color: #ccc;
+  font-weight: 400;
+}
+
+.mint-field .mint-cell-value{
+  position: relative;
+  top: 3px;
+}
+
+.mint-field.is-textarea{
+  .mint-cell-wrapper{
+    .mint-cell-title{
+     align-self: flex-start;
+    }
+  }
+}
+
+.problemArr{
+  .mint-cell{
+    display: inline-block;
+    margin-right: rem($s);
+
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+//.mint-loadmore-content{
+//  transform: initial!important;
+//}
+.has-nav,.market {
+  .mint-loadmore-content{
+    padding-bottom: rem(100px);
+  }
+}
+
+img[lazy=loading],image[lazy=loading],div[lazy=loading] {
+  width: $xxl!important;
+  height: $xxl!important;
+  min-width: initial!important;
+  min-height: initial!important;
+  margin: auto!important;
+}
+// 绑定手机
+.bind-mobile-box {
+  .mint-field {
+    .mint-cell-title {
+      width: 55px!important;
+      margin-right: $m;
+    }
+    .mint-field-other {
+      min-width: rem(50px)!important;
+    }
+  }
+}
+

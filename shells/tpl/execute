@@ -1,0 +1,9 @@
+#!/usr/bin/expect -f
+
+# 脚本执行超时5分钟
+set timeout 300
+
+spawn ssh -t -p {{sshPort}} {{sshUsr}}@{{sshIP}} "su - {{dockerUsr}} -s /bin/bash {{shareDir}}/{{appName}}/release"
+expect "*assword*"
+send "{{dockerUsrPwd}}\n"
+expect eof;

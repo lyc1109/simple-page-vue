@@ -1,0 +1,121 @@
+@mixin btn-size($padding-y: 8px, $padding-x: 12px, $line-height: 1.5) {
+  padding: rem($padding-y) rem($padding-x);
+  line-height: $line-height;
+  height: auto;
+}
+
+.btn {
+  display: inline-block;
+  font-size: $font-size;
+  //border-radius: $border-radius;
+  min-width: rem(88px);
+  background: $white none;
+  box-shadow: none;
+  color: $font-primary;
+  text-align: center;
+  margin: 0;
+  @include border();
+  @include border-radius();
+  @include ripple();
+  @include btn-size();
+}
+
+
+// 按钮样式
+// --------------------------------------------------
+@mixin btn-color($bg: $primary) {
+  background-color: $bg;
+  border-color: $bg !important;
+  color: $white;
+}
+
+.btn-primary { @include btn-color($primary); }
+.btn-success { @include btn-color($success); }
+.btn-danger { @include btn-color($danger); }
+.btn-info { @include btn-color($info); }
+.btn-warn { @include btn-color($warning); }
+.btn-cyan {@include btn-color($cyan);}
+.btn-gray {@include btn-color($font-lighter);}
+.btn-link {
+  background-color: $white;
+  border-color: $white;
+  color: $primary-light;
+}
+
+.btn:disabled {
+  @include opacity(0.6);
+}
+
+// 按钮大小
+// --------------------------------------------------
+
+.btn-sm {
+  font-size: $font-size-s;
+  @include btn-size(5px, 12px);
+  min-width: 0;
+}
+.btn-xs{
+  font-size: $font-size-s;
+  @include btn-size(1px, 5px);
+  min-width: 0;
+}
+.btn-lg {
+  @include btn-size(16px, 16px, 1.4);
+  font-size: rem($font-size-m);
+}
+
+.btn-block{
+  display: block;
+  width: 100%;
+  margin-left: 0!important;
+  border: 0 none;
+  border-radius: 0;
+  font-size: $font-size-m;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+// 按钮线框
+// --------------------------------------------------
+.btn-default-outline{
+  @extend .btn;
+  background-color: $white;
+  color: $font-light;
+  @include border;
+}
+.btn-primary-outline{
+  @extend .btn-primary;
+  background-color: $white;
+  color: $primary;
+}
+.btn-success-outline{
+  @extend .btn-success;
+  background-color: $white;
+  color: $success;
+}
+.btn-danger-outline{
+  @extend .btn-danger;
+  background-color: $white;
+  color: $red-1;
+  border-color: $red-1;
+}
+.btn-info-outline{
+  @extend .btn-info;
+  background-color: $white;
+  color: $cyan;
+  border-color: $cyan;
+}
+.btn-warning-outline{
+  @extend .btn-warn;
+  background-color: $white;
+  color: $yellow-1;
+  border-color: $yellow-1;
+}
+
+
+// 圆角按钮
+// -----------------------------------------------
+.btn-round {
+ border-radius: rem(30px);
+}

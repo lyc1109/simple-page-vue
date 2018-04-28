@@ -1,0 +1,35 @@
+// Grid 布局
+// -------------------------------------
+$grid-columns:              12;                 // 默认生成几列
+$grid-gutter-width:         30px;               // 列间隔
+$grid-float-breakpoint:     768px;              // 断点宽度
+
+$screen-md-min:             992px !default;
+$screen-sm-min:             768px !default;
+$screen-lg-min:             1200px !default;
+
+// 居中固定的列
+@mixin container-fixed($gutter: $grid-gutter-width) {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+  @include clearfix;
+}
+
+// 自动换行的列
+@mixin make-row($gutter: $grid-gutter-width) {
+  margin-left:  ($gutter / -2);
+  margin-right: ($gutter / -2);
+  @include clearfix;
+}
+
+// 适应超小屏幕(手机)的列
+@mixin make-xs-column($columns, $gutter: $grid-gutter-width) {
+  position: relative;
+  float: left;
+  width: percentage(($columns / $grid-columns));
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+}

@@ -1,0 +1,36 @@
+diff a/src/assets/scss/airkiss/airkiss.scss b/src/assets/scss/airkiss/airkiss.scss	(rejected hunks)
+@@ -0,0 +1,34 @@
++/**
++ * 动画辅助样式，参考：https://github.com/daneden/animate.css
++ */
++
++.fadeIn {
++  @include fadeIn();
++}
++.fadeOut {
++  @include fadeOut();
++}
++
++.fadeInLeft {
++  @include fadeInLeft();
++}
++.fadeInRight {
++  @include fadeInRight();
++}
++
++.fadeOutLeft {
++  @include fadeOutLeft();
++}
++.fadeOutRight {
++  @include fadeOutRight();
++}
++
++.slideInRight {
++  @include slideInRight();
++}
++.slideOutRight {
++  @include slideOutRight()
++}
++.slideInUp {
++  @include slideInUp();
++}

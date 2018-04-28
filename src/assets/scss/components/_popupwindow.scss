@@ -1,0 +1,138 @@
+/* ------------------------------------------------
+ * H5自定义插件 -- PopupWindow
+ * ------------------------------------------------ */
+@import "../exports";
+.popup-window {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  display: none;
+  z-index: 999;
+
+  &.in{
+    display: block;
+    @include fadeInUp(.3s);
+  }
+
+  &.out{
+    @include fadeOutDown(.3s);
+    display: none;
+  }
+}
+
+.popup-window .popup-window-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .popup-window-title {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: rem($m);
+    overflow: hidden;
+    justify-content: center;
+    @include border(bottom);
+    h4 {
+      font-weight: 400;
+      font-size: $font-size;
+      margin: 0;
+    }
+    .close {
+      color: $font-light;
+      filter: alpha(opacity=40);
+      opacity: .6;
+      font-size: $font-size;
+      font-weight: 400;
+      width: rem(15px);
+      height: rem(15px);
+      justify-content: center;
+      @include border(all,$font-light);
+      @include border-radius(50%);
+      @extend %ripple;
+      @extend %valign-center;
+    }
+  }
+
+  .popup-window-body {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: $page_bg;
+
+    // 隐藏滚动条同时可滚动
+    &::-webkit-scrollbar {display:none;}
+  }
+
+  .popup-window-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $white;
+    z-index: 1;
+    -webkit-box-shadow: 0 -3px 10px $border;
+    -moz-box-shadow: 0 -3px 10px $border;
+    box-shadow: 0 -3px 10px $border;
+    padding: 0 !important;
+    height: auto;
+    @include border(top);
+    max-width: 768px;
+
+    .btn-block {
+      margin: 0 !important;
+      border-radius: 0;
+      height: 52px;
+      line-height: 52px;
+      padding: 0;
+    }
+
+    .pull-left {
+      text-align: center;
+      height: 45px;
+      line-height: 42px;
+      color: $primary;
+      font-weight: 300;
+
+      .btn-link {
+        font-weight: 300;
+        border-radius: 0;
+        padding: 0;
+      }
+
+      .fa {
+        font-size: 20px;
+        margin-bottom: -2px;
+      }
+    }
+  }
+}
+.popup-page {
+  width: 100%;
+  height: 100%;
+  .popup-box {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .popup-content {
+      height: 100%;
+      position: relative;
+      overflow: scroll;
+      line-height: 1.5;
+    }
+  }
+  .close-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

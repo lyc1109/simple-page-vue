@@ -1,0 +1,126 @@
+html{
+  color: $font-primary;
+  font-size: $font-size;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-weight: 300;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+  overflow: auto;
+  background-color: $page_bg;
+}
+
+img {
+  max-width: 100%;
+}
+
+img[lazy=loading], image[lazy=loading] {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+}
+
+input,select,textarea {
+  @include placeholder();
+}
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: rem(10px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+}
+
+hr {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+a, a:visited, a:focus, a:active{
+  text-decoration: none;
+}
+a{
+  color: $font-primary;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+a:hover {
+  color: $font-light;
+  text-decoration: none;
+}
+a:not([href]):not([tabindex]) {
+  color: inherit;
+  text-decoration: none;
+}
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+a:not([href]):not([tabindex]):focus {
+  outline: 0;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fa{
+  vertical-align: middle;
+}
+
+
+// ---------------------------
+// 滚动条样式
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 5px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: $border;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background-color: $border;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-button {
+  background-color: $gray;
+  display: none;
+}

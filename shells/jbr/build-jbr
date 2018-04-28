@@ -1,0 +1,64 @@
+## Stage环境编译构建任务脚本，脚本执行顺序： build --> execute --> release
+#!/bin/bash
+
+# 获取脚本绝对路径
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd ${scriptPath}
+cd ../../
+
+echo "========================================================"
+echo "== 发布环境 -- 佳贝尔                                    =="
+echo "== 发布应用 -- iotp-h5-vue                              =="
+echo "== 发布脚本 -- ${scriptPath}/build-mac                  =="
+echo "========================================================"
+
+## ================================================================================================
+## 相关信息变量定义
+ENV="jbr"
+
+# 发布日期
+version=`date +%y%m%d%H%M`
+
+# 发布文件输出目录
+outputFolder="$scriptPath/output"
+# 应用名称
+appName="iotp-h5"
+# 应用包名称
+packageName="iotp-h5.tar.gz"
+
+## ================================================================================================
+
+# 异常处理函数
+# @param $1 执行动作描述
+# @param $2 执行结果
+function assertFail(){
+    if [ $2 != "0" ]; then
+        echo "$1 执行失败 ";
+        # 退出脚本
+        exit 1;
+    fi
+}
+
+## 编译打包
+cnpm install
+npm run build-jbr
+
+assertFail 'npm 编译打包' $?
+
+
+if [ -d ${outputFolder} ]; then
+  rm -rf ${outputFolder}
+fi
+mkdir ${outputFolder}
+
+cp -rf ./dist ${outputFolder}
+cp ./shells/jbr/nginx-h5.conf ${outputFolder}
+
+cd ${outputFolder}
+
+# 压缩dist文件夹
+cd ./dist
+tar -czf ${packageName} ./* && cp ${packageName} ..
+cd ..
+rm -rf ./dist
+## ================================================================================================

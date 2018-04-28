@@ -1,0 +1,56 @@
+//vue-image-crop-upload 覆写
+.g-core-image-upload-btn {
+  width: 100%;
+  height: 100%;
+  @extend %valign-center;
+}
+//vue-image-crop-upload 覆写
+.vue-image-crop-upload .vicp-wrap {
+  width: 80%;
+  height: auto;
+}
+.image-mask .mask {
+  background-color: rgba(0,0,0,.5)!important;
+}
+.g-resize-bar {
+  background-color: $primary!important;
+}
+.g-resize-highlight {
+  background-color: rgba(255,255,255,.8)!important;
+}
+.g-core-image-corp-container  .info-aside {
+  height: initial!important;
+  padding: rem($m);
+
+  .btn-groups {
+    margin: 0;
+
+    .btn {
+      height: auto;
+      line-height: initial;
+      padding: rem($xs) rem($s);
+      @extend %font-size-s;
+      @include border-radius($m);
+    }
+
+    .btn-upload {
+      background: $primary!important;
+      background-color: $primary!important;
+      border-color: transparent!important;
+    }
+
+    .btn-cancel {
+      color: $primary!important;
+      @include border(all,$primary-light!important);
+    }
+  }
+}
+//方形背景
+.square-uploadimg .g-core-image-upload-form {
+  height: 100%!important;
+  width: 100%!important;
+}
+//头像
+.user-img-box .g-core-image-upload-form {
+  min-height: rem(140px);
+}

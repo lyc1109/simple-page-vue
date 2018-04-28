@@ -1,0 +1,101 @@
+@import "~variables";
+
+.iair-infos {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-weight: 400;
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 10px;
+
+  .flex-item {
+    border-right: 1px solid #ddd;
+  }
+}
+
+.iair-infos__text {
+  color: $font-light;
+  font-size: $font-size-s;
+  margin-top: 3px;
+}
+
+.iair-actions {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  @include border();
+  background: $gray-extra;
+  text-align: center;
+  color: $font-lighter;
+  line-height: 42px;
+  margin: 0 auto;
+
+  .iconfont {
+    font-size: 26px;
+  }
+}
+
+.iair-actions-green {
+  color: $success;
+  border-color: #DAF4C9;
+  background: #EDF9E3;
+}
+
+.iair-actions-cyan {
+  color: $cyan;
+  border-color: #C6F6ED;
+  background: #E1FAF6;
+}
+
+.iair-actions-red {
+  color: $danger-light;
+  border-color: #FFE0CB;
+  background: #FFEEE1;
+}
+
+.iair-actions-yellow {
+  color: $yellow-1;
+  border-color: #FFF0C0;
+  background: #FFF8E1;
+}
+
+.iair-actions-pink {
+  color: $pink-1;
+  border-color: lighten($pink-1, 15%);
+  background: lighten($pink-1, 25%);
+}
+
+.iair-actions-setting {
+  border: 1px solid #E6F4FD;
+  height: 50px;
+  width: 50px;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding: 3px;
+  text-align: center;
+
+  div{
+    height: 44px;
+    width: 44px;
+    line-height: 44px;
+    background: $primary;
+    color: $white;
+    border-radius: 15px;
+    border: 3px solid #BCE2F9;
+    margin: 0 auto;
+
+    &:after{
+      content: "";
+      display: block;
+      height: 2px;
+      background: $white;
+      width: 20px;
+      margin-top: -8px;
+      margin-left: 12px;
+    }
+  }
+}

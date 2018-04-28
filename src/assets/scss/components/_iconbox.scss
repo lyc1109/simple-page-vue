@@ -1,0 +1,40 @@
+.iconbox{
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  background: $success;
+  border-radius: 50%;
+  color: $white;
+  margin: 0 auto;
+
+  i{
+    font-size: 22px;
+  }
+}
+
+
+.iconbox.iconbox-blue{
+  background: $primary;
+}
+.iconbox.iconbox-yellow{
+  background: $yellow-1;
+}
+.iconbox.iconbox-blue-light{
+  background: $primary-light;
+}
+.iconbox.iconbox-orange{
+  background: $orange-1;
+}
+.iconbox.iconbox-cyan{
+  background: $cyan;
+}
+.iconbox.iconbox-light{
+  background: $gray-light-1;
+  color: $font-lighter;
+}
+
+
+.iconbox.disabled{
+  background: $gray;
+}

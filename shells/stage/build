@@ -1,0 +1,128 @@
+## Stage环境编译构建任务脚本，脚本执行顺序： build --> execute --> release
+#!/bin/bash
+
+# 获取脚本绝对路径
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $scriptPath
+cd ../../
+
+echo "========================================================"
+echo "== 发布环境 -- 测试环境(Stage)                           "
+echo "== 发布应用 -- iotp-h5-vue                              "
+echo "== 发布脚本 -- ${scriptPath}/build                      "
+echo "========================================================"
+
+## ================================================================================================
+## 相关信息变量定义
+ENV="stage"
+
+# 发布日期
+version=`date +%y%m%d%H%M`
+
+# 发布文件输出目录
+outputFolder="$scriptPath/output"
+# 应用名称
+appName="iotp-h5"
+# 应用包名称
+packageName="iotp-h5.tar.gz"
+# 服务器共享目录
+shareDir="/var/www/iotapps"
+
+# 服务SSH配置
+sshIP=120.77.18.119
+sshUsr=xiaoha
+sshPwd=xiaohaHHS2993
+sshPort=3365
+
+# docker用户密码
+dockerUsr=iotusr
+dockerUsrPwd=iotUsr2017
+
+# docker 端口映射
+masterPort='8500'
+slavePort='8501'
+## ================================================================================================
+
+# 异常处理函数
+# @param $1 执行动作描述
+# @param $2 执行结果
+function assertFail(){
+    if [ $2 != "0" ]; then
+        echo "$1 执行失败 ";
+        # 退出脚本
+        exit 1;
+    fi
+}
+
+## ================================================================================================
+## 编译打包
+cnpm install
+npm run build-stage
+
+assertFail 'npm 编译打包' $?
+## ================================================================================================
+
+
+## ================================================================================================
+# 拷贝文件到新目录
+
+if [ -d ${outputFolder} ]; then
+  rm -rf ${outputFolder}
+fi
+mkdir ${outputFolder}
+
+cp -rf ./dist ${outputFolder}
+cp ./shells/stage/nginx-h5.conf ${outputFolder}
+cp ./shells/tpl/release ${outputFolder}/release
+cp ./shells/tpl/execute ${outputFolder}/execute
+assertFail "cp files to ${outputFolder}" $?
+
+cd ${outputFolder}
+
+# 压缩dist文件夹
+cd ./dist
+tar -czf ${packageName} ./* && cp $packageName ..
+cd ..
+rm -rf ./dist
+## ================================================================================================
+
+## ================================================================================================
+# 拷贝文件到新目录
+# 替换变量
+sed -i "s/{{sshIP}}/${sshIP}/g" ./execute
+sed -i "s/{{sshPort}}/${sshPort}/g" ./execute
+sed -i "s/{{sshUsr}}/${sshUsr}/g" ./execute
+sed -i "s/{{sshPwd}}/${sshPwd}/g" ./execute
+sed -i "s/{{dockerUsr}}/${dockerUsr}/g" ./execute
+sed -i "s/{{dockerUsrPwd}}/${dockerUsrPwd}/g" ./execute
+sed -i "s/{{appName}}/${appName}/g" ./execute
+
+sed -i "s:{{shareDir}}:${shareDir}:g" ./execute
+sed -i "s:{{shareDir}}:${shareDir}:g" ./release
+
+sed -i "s/{{ENV}}/${ENV}/g" release
+sed -i "s/{{appName}}/${appName}/g" ./release
+sed -i "s/{{packageName}}/${packageName}/g" ./release
+sed -i "s/{{masterPort}}/${masterPort}/g" ./release
+sed -i "s/{{slavePort}}/${slavePort}/g" ./release
+assertFail "sed params" $?
+## ================================================================================================
+
+mkdir ${appName}
+mv ${packageName} ${appName}
+mv release ${appName}
+mv nginx-h5.conf ${appName}
+assertFail "mv files to dir" $?
+
+echo "远程创建目录: ${shareDir}/${appName}"
+ssh -p ${sshPort} ${sshUsr}@${sshIP} "[ -d ${shareDir}/${appName} ] && rm -rf ${shareDir}/${appName}"
+ssh -p ${sshPort} ${sshUsr}@${sshIP} "[ -d ${shareDir}/${appName} ] || mkdir -p ${shareDir}/${appName}"
+assertFail "mkdir dir on server：${shareDir}/${appName}" $?
+
+scp -r -P ${sshPort} ./${appName} ${sshUsr}@${sshIP}:${shareDir}
+assertFail "scp files server：${shareDir}/${appName}" $?
+
+## ================================================================================================
+## 执行发布
+./execute
+## ================================================================================================

@@ -1,0 +1,20 @@
+.img-circle{
+  border-radius: 50%;
+}
+
+.img-thumbnail {
+  @include border();
+  @include border-radius();
+
+  display: inline-block;
+  max-width: 100%;
+  padding: 1px;
+  background-color: #fff;
+}
+
+// --------------------------
+// 背景图片
+.bg-box {
+  position: relative;
+  @extend %bg;
+}

@@ -1,0 +1,8 @@
+/**
+ * px转换为rem函数
+ *
+ * 注： 字体大小不可使用rem单位
+ */
+@function rem($px){
+  @return $px / $font-size * 1rem;
+}

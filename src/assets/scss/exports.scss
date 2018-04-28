@@ -1,0 +1,13 @@
+// 所有变量、函数导出，以方便.vue全局引用
+@import
+
+"variables/base",
+"variables/colors",
+
+"functions/rem",
+
+"mixins/mixins",
+"mixins/mixins-animates",
+"mixins/mixins-layout",
+"mixins/placeholders"
+;

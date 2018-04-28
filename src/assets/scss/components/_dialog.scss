@@ -1,0 +1,46 @@
+// 对话框样式
+// 基于mint-ui > message-box 调整
+
+.mint-msgbox {
+  min-width: 200px;
+  max-width: 320px;
+  -webkit-transform: translate3d(-50%,-50%,0);
+  transform: translate3d(-50%,-50%,0);
+
+  .mint-msgbox-header{
+    padding-bottom: $s;
+  }
+
+  .mint-msgbox-content{
+    border-bottom: 1px solid $border;
+
+    .mint-msgbox-message{
+      color: $font-light;
+      font-size: $font-size;
+    }
+
+    .mint-msgbox-input {
+      max-width: 100%;
+
+      input{
+        padding: 10px 0 10px 5px;
+        border-radius: 3px;
+        color: $font-primary;
+      }
+    }
+  }
+
+  .mint-msgbox-btns{
+    .mint-msgbox-btn{
+      padding: 5px 0;
+      font-size: $font-size !important;
+    }
+    .mint-msgbox-btn.mint-msgbox-confirm{
+      color: $primary;
+    }
+    .mint-msgbox-btn.mint-msgbox-cancel{
+      border-right: 1px solid $border;
+      color: $font-lighter;
+    }
+  }
+}
